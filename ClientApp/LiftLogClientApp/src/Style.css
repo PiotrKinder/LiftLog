@@ -1,0 +1,15 @@
+body{
+  background-color: #000000;
+}
+
+:root{
+  --active-color: rgb(128, 128, 128);
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+

@@ -1,0 +1,16 @@
+.button{
+    background: linear-gradient(0deg, rgba(70,130,185,1) 0%, rgba(97,155,209,1) 100%);
+    width: 364px;
+    height: 69px;
+    border-radius: 41px;
+    border: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    position: absolute;
+}
+
+button:active{
+    background: linear-gradient(0deg, rgba(51,93,133,1) 0%, rgba(85,136,184,1) 100%);
+    color: rgb(201, 201, 201);
+}
