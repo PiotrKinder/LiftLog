@@ -10,7 +10,11 @@
     position: absolute;
 }
 
-button:active{
+.button:active{
+    background: linear-gradient(0deg, rgba(51,93,133,1) 0%, rgba(85,136,184,1) 100%);
+    color: rgb(201, 201, 201);
+}
+.button:hover{
     background: linear-gradient(0deg, rgba(51,93,133,1) 0%, rgba(85,136,184,1) 100%);
     color: rgb(201, 201, 201);
 }

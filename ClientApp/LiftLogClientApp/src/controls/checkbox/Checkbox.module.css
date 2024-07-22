@@ -1,0 +1,108 @@
+.checkbox_wrapper {
+    --s-xsmall: 0.625em;
+    --s-small: 1.2em;
+    --border-width: 1px;
+    --c-primary: #ffffff;
+    --c-primary-20-percent-opacity: rgba(255, 0, 0, 0.836);
+    --t-base: 0.4s;
+    --t-fast: 0.2s;
+    --e-in: ease-in;
+    --e-out: cubic-bezier(.11,.29,.18,.98);
+
+  display: inline-flex; /* Ustawienie szerokości kontenera na szerokość zawartości */
+  align-items: center; /* Wyrównanie elementów w pionie */
+  text-align: left; /* Wyrównanie elementów do lewej */
+  max-width: 100%; /* Opcjonalnie, aby kontener nie przekraczał szerokości rodzica */
+  }
+
+  .checkbox_wrapper .visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .checkbox_wrapper .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+  }
+  .checkbox_wrapper .checkbox + .checkbox {
+    margin-top: var(--s-small);
+  }
+  .checkbox_wrapper .checkbox__symbol {
+    display: inline-block;
+    display: flex;
+    margin-right: calc(var(--s-small) * 0.7);
+    border: var(--border-width) solid var(--c-primary);
+    position: relative;
+    border-radius: 0.1em;
+    width: 1em;
+    height: 1em;
+    background-color: #ffffff;
+    border-radius: 20%;
+  }
+
+  .checkbox_wrapper .checkbox .icon_checkbox {
+    width: 1.8em;
+    height: 1.8em;
+    fill: none;
+    stroke-width: 3;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    color: var(--c-primary);
+    display: inline-block;
+    color: black;
+  }
+  .checkbox_wrapper .checkbox .icon_checkbox path {
+    transition: stroke-dashoffset var(--t-fast) var(--e-in);
+    stroke-dasharray: 30px, 31px;
+    stroke-dashoffset: 31px;
+  }
+  .checkbox_wrapper .checkbox__textwrapper {
+    color: var(--c-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin: 0;
+  }
+  .checkbox_wrapper .checkbox__trigger:checked + .checkbox__symbol:after {
+    -webkit-animation: ripple-33 1.5s var(--e-out);
+            animation: ripple-33 1.5s var(--e-out);
+  }
+  .checkbox_wrapper .checkbox__trigger:checked + .checkbox__symbol .icon_checkbox path {
+    transition: stroke-dashoffset var(--t-base) var(--e-out);
+    stroke-dashoffset: 0px;
+  }
+
+  .checkbox_wrapper .checkbox__symbol .icon_checkbox path {
+    transform: translateY(-10px); 
+  }
+
+  @-webkit-keyframes ripple-33 {
+    from {
+      transform: scale(0);
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: scale(20);
+    }
+  }
+
+  @keyframes ripple-33 {
+    from {
+      transform: scale(0);
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: scale(20);
+    }
+  }
