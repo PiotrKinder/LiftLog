@@ -82,7 +82,7 @@
   }
 
   .checkbox_wrapper .checkbox__symbol .icon_checkbox path {
-    transform: translateY(-10px); 
+    transform: translateY(-12px); 
   }
 
   @-webkit-keyframes ripple-33 {
