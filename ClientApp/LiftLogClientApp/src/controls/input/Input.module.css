@@ -7,13 +7,17 @@
     width: 366px;
     background-color: black;
     position: relative;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     margin-inline: auto;
 }
 
 .container.active{
     border: 1px var(--active-color) solid;
+}
+
+.container.valid{
+    border: 1px var(--validation-color) solid;
 }
 
 .input{
@@ -47,5 +51,19 @@
 }
 
 .icon.active{
-    color: var(--active-color)
+    color: var(--active-color);
 }
+
+.icon.valid{
+    color: var(--validation-color);
+}
+
+.validText{
+    color: var(--validation-color);
+    position: absolute;
+    top: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding-top: 5px;
+}
+

@@ -1,3 +1,5 @@
+
+
 .container{
     display: flex;
     justify-content: center;
@@ -5,10 +7,12 @@
     height: 20vh; 
     color: white;
     font-family: 'Inter', sans-serif;
-    font-weight: 100;
     font-size: 40px;
 }
 
 .header{
     margin: 0;
+}
+h1{
+    font-weight: 200;
 }

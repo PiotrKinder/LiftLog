@@ -4,6 +4,7 @@ body{
 
 :root{
   --active-color: rgb(128, 128, 128);
+  --validation-color: rgb(139, 27, 27);
 }
 
 #root {
