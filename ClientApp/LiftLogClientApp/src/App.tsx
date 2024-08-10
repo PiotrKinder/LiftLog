@@ -4,14 +4,16 @@ import Checkbox from "./controls/checkbox/Checkbox";
 import Input from "./controls/input/Input";
 import Tile from "./controls/tile/Tile";
 import IconTypeEnum from "./helpers/iconManager/enums/IconTypeEnum";
+import LogInScreen from "./screens/loginScreen/LogInScreen";
+import SignUpScreen from "./screens/signupScreen/SignUpScreen";
+import WelcomeScreen from "./screens/welcomeScreen/WelcomeScreen";
 
 function App() {
   return (
     <>
-      <Input icon={IconTypeEnum.User} text="" placeholder="Email" />
-       {/* <Button text="Log in" /> */}
-      <Checkbox text="Email" isChecked={true} />
-      <Tile onClick={()=>{}} text="Bench press" iconKey={IconTypeEnum.Key}></Tile>
+      {/* <WelcomeScreen /> */}
+      {/* <LogInScreen /> */}
+      <SignUpScreen />
     </>
   );
 }

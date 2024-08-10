@@ -7,6 +7,9 @@
     width: 366px;
     background-color: black;
     position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-inline: auto;
 }
 
 .container.active{

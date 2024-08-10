@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 20vh; 
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    font-size: 40px;
+}
+
+.header{
+    margin: 0;
+}

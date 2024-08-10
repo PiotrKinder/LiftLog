@@ -9,10 +9,13 @@
     --e-in: ease-in;
     --e-out: cubic-bezier(.11,.29,.18,.98);
 
-  display: inline-flex; /* Ustawienie szerokości kontenera na szerokość zawartości */
-  align-items: center; /* Wyrównanie elementów w pionie */
-  text-align: left; /* Wyrównanie elementów do lewej */
-  max-width: 100%; /* Opcjonalnie, aby kontener nie przekraczał szerokości rodzica */
+  display: inline-flex;
+  align-items: center;
+  text-align: left;
+  max-width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5%;
   }
 
   .checkbox_wrapper .visuallyhidden {

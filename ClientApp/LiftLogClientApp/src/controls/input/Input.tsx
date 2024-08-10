@@ -5,7 +5,6 @@ import IconTypeEnum from "../../helpers/iconManager/enums/IconTypeEnum";
 
 interface Props {
   isValid?: boolean;
-  text: string;
   placeholder: string;
   icon?: IconTypeEnum;
 }

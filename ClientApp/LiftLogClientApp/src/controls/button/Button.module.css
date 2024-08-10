@@ -7,14 +7,13 @@
     color: white;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    position: absolute;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-inline: auto;
+    display: block;
 }
 
 .button:active{
-    background: linear-gradient(0deg, rgba(51,93,133,1) 0%, rgba(85,136,184,1) 100%);
-    color: rgb(201, 201, 201);
-}
-.button:hover{
     background: linear-gradient(0deg, rgba(51,93,133,1) 0%, rgba(85,136,184,1) 100%);
     color: rgb(201, 201, 201);
 }
