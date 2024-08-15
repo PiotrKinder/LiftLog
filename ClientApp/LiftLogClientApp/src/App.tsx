@@ -1,19 +1,27 @@
 import "./Style.css";
-import Button from "./controls/button/Button";
-import Checkbox from "./controls/checkbox/Checkbox";
-import Input from "./controls/input/Input";
-import Tile from "./controls/tile/Tile";
-import IconTypeEnum from "./helpers/iconManager/enums/IconTypeEnum";
 import LogInScreen from "./screens/loginScreen/LogInScreen";
 import SignUpScreen from "./screens/signupScreen/SignUpScreen";
 import WelcomeScreen from "./screens/welcomeScreen/WelcomeScreen";
+import ScreenEnum from "./enums/ScreenEnum";
+import { useSelector } from "react-redux";
+import ScreenState from "./slices/screenSlice/IScreenState";
 
 function App() {
+  const currentScreen = useSelector((state: ScreenState) => state.screen);
   return (
     <>
-      {/* <WelcomeScreen /> */}
-      {/* <LogInScreen /> */}
-      <SignUpScreen />
+      {(() => {
+        switch (currentScreen) {
+          case ScreenEnum.welcome:
+            return <WelcomeScreen />;
+          case ScreenEnum.signup:
+            return <SignUpScreen />;
+          case ScreenEnum.login:
+            return <LogInScreen />;
+          default:
+            return null;
+        }
+      })()}
     </>
   );
 }
