@@ -1,0 +1,16 @@
+C:\Repo\LiftLogRepo\ServerApp\Persistence\bin\Debug\net8.0\Persistence.deps.json
+C:\Repo\LiftLogRepo\ServerApp\Persistence\bin\Debug\net8.0\Persistence.dll
+C:\Repo\LiftLogRepo\ServerApp\Persistence\bin\Debug\net8.0\Persistence.pdb
+C:\Repo\LiftLogRepo\ServerApp\Persistence\bin\Debug\net8.0\Domain.dll
+C:\Repo\LiftLogRepo\ServerApp\Persistence\bin\Debug\net8.0\Domain.pdb
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persistence.csproj.AssemblyReference.cache
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persistence.AssemblyInfoInputs.cache
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persistence.AssemblyInfo.cs
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persistence.csproj.CoreCompileInputs.cache
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persistence.sourcelink.json
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persiste.61C28332.Up2Date
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persistence.dll
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\refint\Persistence.dll
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\Persistence.pdb
+C:\Repo\LiftLogRepo\ServerApp\Persistence\obj\Debug\net8.0\ref\Persistence.dll
