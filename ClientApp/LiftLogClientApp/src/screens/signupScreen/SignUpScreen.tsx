@@ -7,34 +7,38 @@ import Header from "../../controls/header/Header";
 import { useDispatch } from "react-redux";
 import { screenActions } from "../../slices/screenSlice/screenSlice";
 import ScreenEnum from "../../enums/ScreenEnum";
+import { useNavigate } from "react-router-dom";
 
 function SignUpScreen() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function buttonBackHandler() {
-    dispatch(screenActions.changeScreen(ScreenEnum.welcome));
+    navigate("/");
   }
 
   return (
     <div className={classes.container}>
-      <Header text="Sign up" />
-      <Input placeholder="Login" icon={icons.User} />
-      <Input
-        placeholder="Email"
-        type="email"
-        icon={icons.Mail}
-        isValid={false}
-        validationMessage="Validation info!"
-      />
-      <Input placeholder="Password" type="password" icon={icons.Key} />
-      <Input
-        placeholder="Confirm password"
-        type="password"
-        icon={icons.Confirm}
-      />
-      <Checkbox text="Remember me" isChecked={false} />
-      <Button text="Next" onCLick={() => {}} />
-      <Button text="Back" onCLick={buttonBackHandler} />
+      <form>
+        <Header text="Sign up" />
+        <Input placeholder="Login" icon={icons.User} />
+        <Input
+          placeholder="Email"
+          type="email"
+          icon={icons.Mail}
+          isValid={false}
+          validationMessage="Validation info!"
+        />
+        <Input placeholder="Password" type="password" icon={icons.Key} />
+        <Input
+          placeholder="Confirm password"
+          type="password"
+          icon={icons.Confirm}
+        />
+        <Checkbox text="Remember me" isChecked={false} />
+        <Button text="Next" onCLick={() => {}} />
+        <Button text="Back" onCLick={buttonBackHandler} />
+      </form>
     </div>
   );
 }

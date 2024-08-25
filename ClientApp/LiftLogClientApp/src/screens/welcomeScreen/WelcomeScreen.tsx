@@ -5,15 +5,17 @@ import logo from "../../../public/liftLogLogov2whiteClear.png";
 import { screenActions } from "../../slices/screenSlice/screenSlice";
 import { useDispatch } from "react-redux";
 import ScreenEnum from "../../enums/ScreenEnum";
+import { useNavigate } from "react-router-dom";
 
 function WelcomeScreen() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   function buttonLoginHandler() {
-    dispatch(screenActions.changeScreen(ScreenEnum.login));
+    navigate("/login");
   }
 
   function buttonSignupHandler() {
-    dispatch(screenActions.changeScreen(ScreenEnum.signup));
+    navigate("/signup");
   }
 
   return (
