@@ -12,9 +12,7 @@ namespace Domain
     {
         public Guid Id { get; set; }
         public string DataStat {  get; set; }
-        [ForeignKey("User")]
-        public Guid UserId { get; set; }
-        [ForeignKey("Exercise")]
-        public Guid ExerciseId { get; set; }
+        public User User { get; set; }
+        public Exercise Exercise { get; set; }
     }
 }

@@ -133,3 +133,11 @@ C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Wor
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

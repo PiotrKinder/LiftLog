@@ -14,7 +14,7 @@ namespace Domain
         public string Icon { get; set; }
         public int Reps { get; set; }
         public bool AllowExtraSet { get; set; }
-        [ForeignKey("User")]
-        public Guid UserId { get; set; }
+        public User User { get; set; }
+        public ICollection<Exercise> Exercises { get; set; }
     }
 }

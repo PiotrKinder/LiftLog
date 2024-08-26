@@ -26,6 +26,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("AllowExtraSet")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid?>("ExerciseId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Icon")
                         .HasColumnType("TEXT");
 
@@ -35,10 +38,14 @@ namespace Persistence.Migrations
                     b.Property<int>("Reps")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Exercises");
                 });
@@ -52,13 +59,17 @@ namespace Persistence.Migrations
                     b.Property<string>("DataStat")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ExerciseId")
+                    b.Property<Guid?>("ExerciseId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Statistics");
                 });
@@ -84,6 +95,46 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Domain.Exercise", b =>
+                {
+                    b.HasOne("Domain.Exercise", null)
+                        .WithMany("Exercises")
+                        .HasForeignKey("ExerciseId");
+
+                    b.HasOne("Domain.User", "User")
+                        .WithMany("Exercises")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Statistic", b =>
+                {
+                    b.HasOne("Domain.Exercise", "Exercise")
+                        .WithMany()
+                        .HasForeignKey("ExerciseId");
+
+                    b.HasOne("Domain.User", "User")
+                        .WithMany("Statistic")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Exercise", b =>
+                {
+                    b.Navigation("Exercises");
+                });
+
+            modelBuilder.Entity("Domain.User", b =>
+                {
+                    b.Navigation("Exercises");
+
+                    b.Navigation("Statistic");
                 });
 #pragma warning restore 612, 618
         }
