@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -6,53 +7,37 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Auth;
 
 namespace API.Controllers
 {
     public class AuthController : BaseApiController
     {
         private readonly IConfiguration _configuration;
-        public AuthController(IConfiguration configuration)
+
+        public AuthController(IConfiguration configuration, IMediator mediator)
         {
             _configuration = configuration;
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            if (IsValidUserCredentials(loginRequest.Email, loginRequest.Password))
+            try
             {
-                var token = GenerateJwtToken(loginRequest.Email);
+                var token = await Mediator.Send(new Login.Query
+                {
+                    email = loginRequest.Email,
+                    password = loginRequest.Password,
+                    key = _configuration["Jwt:Key"],
+                    audience = _configuration["Jwt:Issuer"],
+                    issuer = _configuration["Jwt:Issuer"]
+                });
                 return Ok(new { token });
-            }
-
-            return Unauthorized();
-        }
-
-        private bool IsValidUserCredentials(string username, string password)
-        {
-            return username == "admin" && password == "admin";
-        }
-
-        private string GenerateJwtToken(string username)
-        {
-            var claims = new[]
+            } catch(UnauthorizedAccessException ex)
             {
-            new Claim(JwtRegisteredClaimNames.Sub, username),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                return Unauthorized(new { message = ex.Message });
+            }
         }
     }
 }
