@@ -42,12 +42,8 @@ namespace Application.Auth
                 _context = context;
             }
             public async Task<string> Handle(Query request, CancellationToken cancellationToken) {
-                //var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == request.email);
-                //if (user == null && !VerifyPassword(request.password, user.Password))
-                //{
-                //    throw new UnauthorizedAccessException("Invalid email or password.");
-                //}
-                if (request.email != "admin@admin.com" || request.password != "admin")
+                var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == request.email);
+                if (user == null && !VerifyPassword(request.password, user.Password))
                 {
                     throw new UnauthorizedAccessException("Invalid email or password.");
                 }

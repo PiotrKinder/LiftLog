@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Application.Auth;
+using Contracts.DTO.Auth;
 
 namespace API.Controllers
 {
@@ -21,14 +22,14 @@ namespace API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Login([FromBody] AuthRequest loginRequest)
         {
             try
             {
                 var token = await Mediator.Send(new Login.Query
                 {
-                    email = loginRequest.Email,
-                    password = loginRequest.Password,
+                    email = loginRequest.email,
+                    password = loginRequest.password,
                     key = _configuration["Jwt:Key"],
                     audience = _configuration["Jwt:Issuer"],
                     issuer = _configuration["Jwt:Issuer"]
