@@ -1,17 +1,13 @@
-﻿using Domain;
+﻿using Application.Helpers;
+using DTO.Contracts.Auth;
+using DTO.DTO;
 using MediatR;
-using Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Identity.Data;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Persistence;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Application.Auth
 {
@@ -19,43 +15,28 @@ namespace Application.Auth
     {
         public class Query : IRequest<string>
         {
-            public string email {  get; set; }
-            public string password { get; set; }
-            public string key { get; set; }
-            public string issuer { get; set; }
-            public string audience { get; set; }
+            public AuthRequest AuthRequest { get; set; }
+            public JwtData TokenKeys { get; set; }
 
         }
 
-        public class Handler : IRequestHandler<Query,string>
+        public class Handler : IRequestHandler<Query, string>
         {
             private readonly DataContext _context;
-
-            private class JwtData()
-            {
-                public string key { set; get; }
-                public string issuer { set; get; }
-                public string audience { set; get; }
-            }
             public Handler(DataContext context)
             {
                 _context = context;
             }
-            public async Task<string> Handle(Query request, CancellationToken cancellationToken) {
-                var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == request.email);
-                if (user == null && !VerifyPassword(request.password, user.Password))
+            public async Task<string> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var userData = request.AuthRequest;
+                var tokenData = request.TokenKeys;
+                var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == userData.email);
+                if (user == null || !PasswordVerification.Check(userData.password, user.Password))
                 {
                     throw new UnauthorizedAccessException("Invalid email or password.");
                 }
-                JwtData jwtData = new JwtData() { key = request.key, audience=request.audience, issuer=request.issuer};    
-                return GenerateJwtToken(request.email, jwtData);
-            }
-            private bool VerifyPassword(string password, string storedHash)
-            {
-                var passwordHasher = new PasswordHasher<User>();
-                var verificationResult = passwordHasher.VerifyHashedPassword(null, storedHash, password);
-
-                return verificationResult == PasswordVerificationResult.Success;
+                return GenerateJwtToken(userData.email, tokenData);
             }
             private string GenerateJwtToken(string username, JwtData jwtData)
             {

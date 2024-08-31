@@ -1,5 +1,5 @@
 ﻿using Application.Users;
-using Contracts.DTO.User;
+using DTO.Contracts.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,10 +22,11 @@ namespace API.Controllers
                 await Mediator.Send(new Create.Command { RegisterRequest = request });
                 return Ok();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return BadRequest(ex.Message);
             }
-           
+
         }
     }
 }

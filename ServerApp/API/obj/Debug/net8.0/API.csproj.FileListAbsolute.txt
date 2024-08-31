@@ -143,5 +143,5 @@ C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Microsoft.IdentityModel.Token
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\MediatR.dll
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\MediatR.Contracts.dll
-C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Contracts.dll
-C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Contracts.pdb
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\DTO.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\DTO.pdb

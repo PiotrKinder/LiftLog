@@ -10,5 +10,6 @@ namespace API.Controllers
         private IMediator mediator;
 
         protected IMediator Mediator => this.mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+
     }
 }

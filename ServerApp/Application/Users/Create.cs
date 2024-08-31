@@ -1,6 +1,6 @@
 ﻿using Application.Validators;
-using Contracts.DTO.User;
 using Domain;
+using DTO.Contracts.User;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

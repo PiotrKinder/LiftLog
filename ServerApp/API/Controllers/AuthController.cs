@@ -1,14 +1,7 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.Data;
+﻿using Application.Auth;
+using DTO.Contracts.Auth;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Application.Auth;
-using Contracts.DTO.Auth;
 
 namespace API.Controllers
 {
@@ -28,14 +21,18 @@ namespace API.Controllers
             {
                 var token = await Mediator.Send(new Login.Query
                 {
-                    email = loginRequest.email,
-                    password = loginRequest.password,
-                    key = _configuration["Jwt:Key"],
-                    audience = _configuration["Jwt:Issuer"],
-                    issuer = _configuration["Jwt:Issuer"]
+                    AuthRequest = loginRequest,
+                    TokenKeys = new DTO.DTO.JwtData()
+                    {
+                        key = _configuration["Jwt:Key"],
+                        audience = _configuration["Jwt:Issuer"],
+                        issuer = _configuration["Jwt:Issuer"]
+                    }
+
                 });
                 return Ok(new { token });
-            } catch(UnauthorizedAccessException ex)
+            }
+            catch (UnauthorizedAccessException ex)
             {
                 return Unauthorized(new { message = ex.Message });
             }

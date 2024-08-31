@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{861DD738-4923-4BC6-B8BE-183CEFA81EAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{588DF8BD-4632-413B-9138-2F35C85FA811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "Contracts\DTO.csproj", "{588DF8BD-4632-413B-9138-2F35C85FA811}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

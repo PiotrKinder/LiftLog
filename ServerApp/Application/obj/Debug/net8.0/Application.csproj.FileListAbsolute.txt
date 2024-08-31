@@ -16,5 +16,5 @@ C:\Repo\LiftLogRepo\ServerApp\Application\obj\Debug\net8.0\Application.dll
 C:\Repo\LiftLogRepo\ServerApp\Application\obj\Debug\net8.0\refint\Application.dll
 C:\Repo\LiftLogRepo\ServerApp\Application\obj\Debug\net8.0\Application.pdb
 C:\Repo\LiftLogRepo\ServerApp\Application\obj\Debug\net8.0\ref\Application.dll
-C:\Repo\LiftLogRepo\ServerApp\Application\bin\Debug\net8.0\Contracts.dll
-C:\Repo\LiftLogRepo\ServerApp\Application\bin\Debug\net8.0\Contracts.pdb
+C:\Repo\LiftLogRepo\ServerApp\Application\bin\Debug\net8.0\DTO.dll
+C:\Repo\LiftLogRepo\ServerApp\Application\bin\Debug\net8.0\DTO.pdb

@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\Contracts.csproj"
+              "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\DTO.csproj": {
+                "projectPath": "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\DTO.csproj"
               },
               "C:\\Repo\\LiftLogRepo\\ServerApp\\Domain\\Domain.csproj": {
                 "projectPath": "C:\\Repo\\LiftLogRepo\\ServerApp\\Domain\\Domain.csproj"
@@ -85,12 +85,12 @@
         }
       }
     },
-    "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\Contracts.csproj": {
+    "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\Contracts.csproj",
-        "projectName": "Contracts",
-        "projectPath": "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\DTO.csproj",
+        "projectName": "DTO",
+        "projectPath": "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\DTO.csproj",
         "packagesPath": "C:\\Users\\Piotr\\.nuget\\packages\\",
         "outputPath": "C:\\Repo\\LiftLogRepo\\ServerApp\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
