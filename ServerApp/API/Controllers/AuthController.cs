@@ -25,7 +25,7 @@ namespace API.Controllers
                     TokenKeys = new DTO.DTO.JwtData()
                     {
                         key = _configuration["Jwt:Key"],
-                        audience = _configuration["Jwt:Issuer"],
+                        audience = _configuration["Jwt:Audience"],
                         issuer = _configuration["Jwt:Issuer"]
                     }
 

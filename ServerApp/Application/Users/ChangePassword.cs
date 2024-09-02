@@ -1,20 +1,19 @@
 ﻿using Application.Helpers;
 using Application.Validators;
 using DTO.Contracts.User;
-using DTO.DTO;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using System.Security.Claims;
 
 namespace Application.Users
 {
-    internal class ChangePassword
+    public class ChangePassword
     {
         public class Command : IRequest
         {
             public ChangePasswordRequest ChangePasswordRequest { get; set; }
-            public JwtData JwtData { get; set; }
         }
 
         public class Handler : IRequestHandler<Command>
@@ -30,9 +29,14 @@ namespace Application.Users
             public async Task Handle(Command request, CancellationToken cancellationToken)
             {
                 var userValidator = new UserValidators();
-                var email = _httpContext.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
-                var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
-                if (user == null || !PasswordVerification.Check(request.ChangePasswordRequest.oldPassword, user.Password))
+                var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var user = await _context.Users.Include(e => e.Exercises).SingleOrDefaultAsync(u => u.Email == email);
+
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+                if (!PasswordVerification.Check(request.ChangePasswordRequest.oldPassword, user.Password))
                 {
                     throw new UnauthorizedAccessException("Invalid old password.");
                 }

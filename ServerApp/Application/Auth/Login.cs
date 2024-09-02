@@ -36,7 +36,7 @@ namespace Application.Auth
                 {
                     throw new UnauthorizedAccessException("Invalid email or password.");
                 }
-                return GenerateJwtToken(userData.email, tokenData);
+                return GenerateJwtToken(user.Email, tokenData);
             }
             private string GenerateJwtToken(string username, JwtData jwtData)
             {

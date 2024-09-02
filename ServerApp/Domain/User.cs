@@ -8,6 +8,5 @@
         public string Password { get; set; }
         public DateTime Created { get; set; }
         public ICollection<Exercise> Exercises { get; set; }
-        public ICollection<Statistic> Statistic { get; set; }
     }
 }

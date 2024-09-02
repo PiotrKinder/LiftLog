@@ -26,24 +26,19 @@ namespace Persistence.Migrations
                     b.Property<bool>("AllowExtraSet")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("ExerciseId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Icon")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Reps")
+                    b.Property<int>("Sets")
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExerciseId");
 
                     b.HasIndex("UserId");
 
@@ -99,10 +94,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Exercise", b =>
                 {
-                    b.HasOne("Domain.Exercise", null)
-                        .WithMany("Exercises")
-                        .HasForeignKey("ExerciseId");
-
                     b.HasOne("Domain.User", "User")
                         .WithMany("Exercises")
                         .HasForeignKey("UserId");
@@ -113,11 +104,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Statistic", b =>
                 {
                     b.HasOne("Domain.Exercise", "Exercise")
-                        .WithMany()
+                        .WithMany("Statistic")
                         .HasForeignKey("ExerciseId");
 
                     b.HasOne("Domain.User", "User")
-                        .WithMany("Statistic")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("Exercise");
@@ -127,14 +118,12 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Exercise", b =>
                 {
-                    b.Navigation("Exercises");
+                    b.Navigation("Statistic");
                 });
 
             modelBuilder.Entity("Domain.User", b =>
                 {
                     b.Navigation("Exercises");
-
-                    b.Navigation("Statistic");
                 });
 #pragma warning restore 612, 618
         }

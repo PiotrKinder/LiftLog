@@ -8,7 +8,7 @@ using Persistence;
 
 namespace Application.Users
 {
-    public class Create
+    public class CreateUser
     {
         public class Command : IRequest
         {
@@ -47,10 +47,6 @@ namespace Application.Users
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
             }
-        }
-        private void validatePassword()
-        {
-
         }
     }
 }
