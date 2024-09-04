@@ -1,4 +1,5 @@
-﻿using Application.Validators;
+﻿using Application.Base;
+using Application.Validators;
 using Domain;
 using DTO.Contracts.User;
 using MediatR;
@@ -15,12 +16,10 @@ namespace Application.Users
             public RegisterRequest RegisterRequest { get; set; }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : BaseHandler, IRequestHandler<Command>
         {
-            private readonly DataContext _context;
-            public Handler(DataContext context)
+            public Handler(DataContext context) : base(context)
             {
-                _context = context;
             }
 
             public async Task Handle(Command request, CancellationToken cancellationToken)

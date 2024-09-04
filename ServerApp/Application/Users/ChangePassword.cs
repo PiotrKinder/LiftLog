@@ -1,11 +1,10 @@
-﻿using Application.Helpers;
+﻿using Application.Base;
 using Application.Validators;
 using DTO.Contracts.User;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using System.Security.Claims;
 
 namespace Application.Users
 {
@@ -16,27 +15,23 @@ namespace Application.Users
             public ChangePasswordRequest ChangePasswordRequest { get; set; }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : BaseHandler, IRequestHandler<Command>
         {
-            private readonly DataContext _context;
-            private readonly IHttpContextAccessor _httpContext;
-            public Handler(DataContext context, IHttpContextAccessor httpContext)
+            public Handler(DataContext context, IHttpContextAccessor httpContext) : base(context, httpContext)
             {
-                _context = context;
-                _httpContext = httpContext;
             }
 
             public async Task Handle(Command request, CancellationToken cancellationToken)
             {
                 var userValidator = new UserValidators();
-                var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                var user = await _context.Users.Include(e => e.Exercises).SingleOrDefaultAsync(u => u.Email == email);
+                var userId = GetUserId().Result;
+                var user = await _context.Users.Include(e => e.Exercises).SingleOrDefaultAsync(u => u.Id == userId);
 
                 if (user == null)
                 {
                     throw new Exception("User not found.");
                 }
-                if (!PasswordVerification.Check(request.ChangePasswordRequest.oldPassword, user.Password))
+                if (!ChackPassword(request.ChangePasswordRequest.oldPassword, user.Password))
                 {
                     throw new UnauthorizedAccessException("Invalid old password.");
                 }

@@ -1,9 +1,9 @@
-﻿using DTO.Contracts.Exercise;
+﻿using Application.Base;
+using DTO.Contracts.Exercise;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using System.Security.Claims;
 
 
 namespace Application.Exercise
@@ -14,20 +14,17 @@ namespace Application.Exercise
         {
         }
 
-        public class Handler : IRequestHandler<Query, List<GetUserExerciseResponse>>
+        public class Handler : BaseHandler, IRequestHandler<Query, List<GetUserExerciseResponse>>
         {
-            private readonly DataContext _context;
-            private readonly IHttpContextAccessor _httpContext;
-            public Handler(DataContext context, IHttpContextAccessor httpContext)
+
+            public Handler(DataContext context, IHttpContextAccessor httpContext) : base(context, httpContext)
             {
-                _context = context;
-                _httpContext = httpContext;
             }
 
             public async Task<List<GetUserExerciseResponse>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                return await this._context.Exercises.Where(e => e.User.Email == email).Select(e => new GetUserExerciseResponse
+                var userId = GetUserId().Result;
+                return await this._context.Exercises.Where(e => e.User.Id == userId).Select(e => new GetUserExerciseResponse
                 {
                     Id = e.Id,
                     Name = e.Name,
