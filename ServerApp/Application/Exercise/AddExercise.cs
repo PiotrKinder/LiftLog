@@ -22,7 +22,7 @@ namespace Application.Exercise
 
             public async Task Handle(Command request, CancellationToken cancellationToken)
             {
-                var userId = GetUserId().Result;
+                var userId = await GetUserId();
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
                 if (user == null)
@@ -33,10 +33,10 @@ namespace Application.Exercise
                 var exercise = new Domain.Exercise()
                 {
                     Id = Guid.NewGuid(),
-                    Name = request.AddExerciseRequest.name,
-                    Icon = request.AddExerciseRequest.icon,
-                    Sets = request.AddExerciseRequest.sets,
-                    AllowExtraSet = request.AddExerciseRequest.extraSet,
+                    Name = request.AddExerciseRequest.Name,
+                    Icon = request.AddExerciseRequest.Icon,
+                    Sets = request.AddExerciseRequest.Sets,
+                    AllowExtraSet = request.AddExerciseRequest.ExtraSet,
                     User = user,
                 };
                 _context.Exercises.Add(exercise);

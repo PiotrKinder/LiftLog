@@ -29,8 +29,8 @@ namespace Application.Auth
             {
                 var userData = request.AuthRequest;
                 var tokenData = request.TokenKeys;
-                var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == userData.email);
-                if (user == null || !ChackPassword(userData.password, user.Password))
+                var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == userData.Email);
+                if (user == null || !ChackPassword(userData.Password, user.Password))
                 {
                     throw new UnauthorizedAccessException("Invalid email or password.");
                 }

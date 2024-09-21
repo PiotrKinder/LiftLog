@@ -31,14 +31,14 @@ namespace Application.Users
                 {
                     throw new Exception("User not found.");
                 }
-                if (!ChackPassword(request.ChangePasswordRequest.oldPassword, user.Password))
+                if (!ChackPassword(request.ChangePasswordRequest.OldPassword, user.Password))
                 {
                     throw new UnauthorizedAccessException("Invalid old password.");
                 }
 
-                userValidator.passwordValidator(request.ChangePasswordRequest.newPassword);
+                userValidator.passwordValidator(request.ChangePasswordRequest.NewPassword);
 
-                user.Password = request.ChangePasswordRequest.newPassword;
+                user.Password = request.ChangePasswordRequest.NewPassword;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
             }
