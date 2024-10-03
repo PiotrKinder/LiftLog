@@ -1,0 +1,33 @@
+src/
+│
+├── components/            # Reużywalne, wspólne komponenty (np. button, modal)
+│   ├── Button.tsx
+│   ├── Modal.tsx
+│
+├── hooks/                 # Własne hooki (np. useFetch)
+│   ├── useFetch.ts
+│   ├── useForm.ts
+│
+├── services/              # Warstwa komunikacji z API (np. fetch, axios)
+│   ├── apiClient.ts       # Klient API (możesz tutaj mieć konfigurację axios)
+│   ├── userService.ts     # Funkcje do fetchowania danych z API
+│
+├── store/                 # Globalny stan aplikacji (np. Redux, Context API)
+│   ├── userReducer.ts     # Reducer do zarządzania stanem użytkownika
+│   ├── userActions.ts     # Akcje dla użytkownika
+│   ├── store.ts           # Konfiguracja stanu globalnego
+│
+├── pages/                 # Strony aplikacji, podzielone na funkcjonalności
+│   ├── Home/
+│   │   ├── Home.tsx       # Główna strona
+│   │   ├── Home.module.css
+│   ├── User/
+│   │   ├── UserList.tsx   # Strona wyświetlania listy użytkowników
+│   │   ├── UserDetail.tsx # Strona szczegółów użytkownika
+│   │   ├── UserForm.tsx   # Strona formularza edycji/tworzenia użytkownika
+│   │   ├── User.module.css
+│
+├── App.tsx                # Główny komponent aplikacji
+├── index.tsx              # Punkt wejściowy aplikacji
+└── types/                 # Typy TS
+    ├── userTypes.ts       # Typy związane z danymi użytkowników (np. User, UserList)

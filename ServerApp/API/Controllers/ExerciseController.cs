@@ -1,5 +1,6 @@
 ﻿using Application.Exercise;
-using DTO.Contracts.Exercise;
+using DTO.Contracts.Exercise.Commands;
+using DTO.Contracts.Exercise.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace API.Controllers
     public class ExerciseController : BaseApiController
     {
         [HttpPost("add")]
-        public async Task<IActionResult> Add([FromBody] AddExerciseRequest request)
+        public async Task<IActionResult> Add([FromBody] CreateExerciseCommand request)
         {
             try
             {
@@ -23,10 +24,31 @@ namespace API.Controllers
 
         }
 
-        [HttpGet("get")]
-        public async Task<ActionResult<List<GetUserExerciseResponse>>> GetUserExercise(CancellationToken cancellationToken)
+        [HttpGet("getAll")]
+        public async Task<ActionResult<List<GetExerciseListItemQuery>>> GetUserExercises()
         {
-            return await this.Mediator.Send(new GetUserExercise.Query(), cancellationToken);
+            return await Mediator.Send(new GetUserExercises.Query());
+        }
+
+        [HttpGet("get/{id}")]
+        public async Task<ActionResult<GetExerciseQuery>> GetExercise(Guid id)
+        {
+            return await Mediator.Send(new GetExercise.Query { Id = id });
+        }
+
+        [HttpPut("edit/{id}")]
+        public async Task<IActionResult> EditExercise(Guid id, EditExerciseCommand editExerciseRequest)
+        {
+            try
+            {
+                await Mediator.Send(new EditExercise.Command { Id = id, data = editExerciseRequest });
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

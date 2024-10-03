@@ -7,13 +7,13 @@ using Persistence;
 
 namespace Application.Exercise
 {
-    public class AddExercise
+    public class EditExercise
     {
         public class Command : IRequest
         {
-            public CreateExerciseCommand AddExerciseRequest { get; set; }
+            public Guid Id { get; set; }
+            public EditExerciseCommand data { get; set; }
         }
-
         public class Handler : BaseHandler, IRequestHandler<Command>
         {
             public Handler(DataContext context, IHttpContextAccessor httpContext) : base(context, httpContext)
@@ -30,17 +30,16 @@ namespace Application.Exercise
                     throw new Exception("User not found.");
                 }
 
-                var exercise = new Domain.Exercise()
+                var exercise = await _context.Exercises.FirstOrDefaultAsync(x => x.User.Id == userId && x.Id == request.Id);
+                if (exercise == null)
                 {
-                    Id = Guid.NewGuid(),
-                    Name = request.AddExerciseRequest.Name,
-                    Icon = request.AddExerciseRequest.Icon,
-                    Sets = request.AddExerciseRequest.Sets,
-                    AllowExtraSet = request.AddExerciseRequest.ExtraSet,
-                    User = user,
-                };
-                _context.Exercises.Add(exercise);
-                await _context.SaveChangesAsync();
+                    throw new Exception("Exercise not found.");
+                }
+                exercise.Name = request.data.Name;
+                exercise.Icon = request.data.Icon;
+                exercise.Sets = request.data.Sets;
+                exercise.AllowExtraSet = request.data.ExtraSet;
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
     }

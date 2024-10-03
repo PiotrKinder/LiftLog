@@ -1,5 +1,6 @@
 ﻿using Application.Base;
 using DTO.Contracts.Stats;
+using DTO.Contracts.Stats.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,8 @@ namespace Application.Stats
     {
         public class Command : IRequest
         {
-            public AddNewUnitRequest AddNewUnitRequest { get; set; }
+            public Guid ExerciseId { get; set; }
+            public CreateExerciseUnitCommand ExerciseUnit { get; set; }
         }
 
         public class Handler : BaseHandler, IRequestHandler<Command>
@@ -29,26 +31,31 @@ namespace Application.Stats
                 {
                     throw new KeyNotFoundException("User not found.");
                 }
-                var exerciseId = request.AddNewUnitRequest.exerciseId;
+                var exerciseId = request.ExerciseId;
                 var exercise = await _context.Exercises.FirstOrDefaultAsync(e => e.Id == exerciseId && e.User == user); ;
                 if (exercise == null)
                 {
                     throw new KeyNotFoundException("Exercise not existe.");
                 }
+                if (exercise.AllowExtraSet == false && request.ExerciseUnit.ExtraSet != null)
+                {
+                    throw new Exception("Extra set is not allowed.");
+                }
+                if (exercise.Sets != request.ExerciseUnit.ExerciseSet.Count)
+                {
+                    throw new Exception("The number of sets in the request does not match the existing exercise sets.");
+                }
                 var newUnit = new ExerciseUnitModel()
                 {
                     Id = Guid.NewGuid(),
-                    SessionDate = request.AddNewUnitRequest.exerciseUnit.SessionDate,
-                    ExerciseSet = request.AddNewUnitRequest.exerciseUnit.ExerciseSet,
-                    ExtraSet = request.AddNewUnitRequest.exerciseUnit.ExtraSet,
+                    SessionDate = request.ExerciseUnit.SessionDate,
+                    ExerciseSet = request.ExerciseUnit.ExerciseSet,
+                    ExtraSet = request.ExerciseUnit.ExtraSet,
                 };
                 var statistic = await _context.Statistics.FirstOrDefaultAsync(s => s.Exercise == exercise);
                 if (statistic == null)
                 {
-                    var newStat = new StatsModel
-                    {
-                        ExerciseUnits = new List<ExerciseUnitModel> { newUnit }
-                    };
+                    var newStat = new List<ExerciseUnitModel> { newUnit };
 
                     var newStatistic = new Domain.Statistic
                     {
@@ -62,8 +69,8 @@ namespace Application.Stats
                 }
                 else
                 {
-                    var dataStat = JsonSerializer.Deserialize<StatsModel>(statistic.DataStat);
-                    dataStat.ExerciseUnits.Add(newUnit);
+                    var dataStat = JsonSerializer.Deserialize<List<ExerciseUnitModel>>(statistic.DataStat);
+                    dataStat.Add(newUnit);
                     statistic.DataStat = JsonSerializer.Serialize(dataStat);
                 }
                 await _context.SaveChangesAsync();
