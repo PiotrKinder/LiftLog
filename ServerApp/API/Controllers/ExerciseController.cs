@@ -27,13 +27,29 @@ namespace API.Controllers
         [HttpGet("getAll")]
         public async Task<ActionResult<List<GetExerciseListItemQuery>>> GetUserExercises()
         {
-            return await Mediator.Send(new GetUserExercises.Query());
+            try
+            {
+                return await Mediator.Send(new GetUserExercises.Query());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         [HttpGet("get/{id}")]
         public async Task<ActionResult<GetExerciseQuery>> GetExercise(Guid id)
         {
-            return await Mediator.Send(new GetExercise.Query { Id = id });
+            try
+            {
+                return await Mediator.Send(new GetExercise.Query { Id = id });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         [HttpPut("edit/{id}")]

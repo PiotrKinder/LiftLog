@@ -9,7 +9,7 @@ namespace API.Controllers
     [Authorize]
     public class StatsController : BaseApiController
     {
-        [HttpPost("add/{exerciseId}/stat")]
+        [HttpPost("add/exercise={exerciseId}")]
         public async Task<IActionResult> SaveStats([FromBody] CreateExerciseUnitCommand request, Guid exerciseId)
         {
             try
@@ -23,10 +23,33 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("get/exercise={id}")]
-        public async Task<ActionResult<List<GetExerciseUnitListItemQuery>>> GetStats(Guid id)
+        [HttpGet("get/exercise={exerciseId}")]
+        public async Task<ActionResult<List<GetExerciseUnitListItemQuery>>> GetStats(Guid exerciseId)
         {
-            return await Mediator.Send(new GetStats.Query { Id = id });
+            try
+            {
+                return await Mediator.Send(new GetStats.Query { Id = exerciseId });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet("get/last/exercise={exerciseId}")]
+        public async Task<ActionResult<GetExerciseUnitItemQuery>> GetLastStats(Guid exerciseId)
+        {
+            try
+            {
+                return await Mediator.Send(new GetLastStat.Query { ExerciseId = exerciseId });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+
         }
 
 

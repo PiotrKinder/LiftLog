@@ -9,21 +9,21 @@ using System.Text.Json;
 
 namespace Application.Stats
 {
-    public class GetStats
+    public class GetLastStat
     {
-        public class Query : IRequest<List<GetExerciseUnitListItemQuery>>
+        public class Query : IRequest<GetExerciseUnitItemQuery>
         {
-            public Guid Id { get; set; }
+            public Guid ExerciseId { get; set; }
         }
 
-        public class Handler : BaseHandler, IRequestHandler<Query, List<GetExerciseUnitListItemQuery>>
+        public class Handler : BaseHandler, IRequestHandler<Query, GetExerciseUnitItemQuery>
         {
 
             public Handler(DataContext context, IHttpContextAccessor httpContext) : base(context, httpContext)
             {
             }
 
-            public async Task<List<GetExerciseUnitListItemQuery>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<GetExerciseUnitItemQuery> Handle(Query request, CancellationToken cancellationToken)
             {
                 var userId = await GetUserId();
 
@@ -34,7 +34,7 @@ namespace Application.Stats
                     throw new KeyNotFoundException("User not found.");
                 }
 
-                var exercise = await _context.Exercises.FirstOrDefaultAsync(e => e.Id == request.Id && e.User == user);
+                var exercise = await _context.Exercises.FirstOrDefaultAsync(e => e.Id == request.ExerciseId && e.User == user);
 
                 if (exercise == null)
                 {
@@ -47,14 +47,9 @@ namespace Application.Stats
                 {
                     throw new KeyNotFoundException("Stats not found or DataStat is null.");
                 }
-                var serialize = JsonSerializer.Deserialize<List<ExerciseUnitModel>>(stats.DataStat) ?? throw new InvalidOperationException("Failed to deserialize StatsModel.");
-                return serialize.Select(unit => new GetExerciseUnitListItemQuery
-                {
-                    Id = unit.Id,
-                    SessionDate = unit.SessionDate,
-                    ExerciseSet = unit.ExerciseSet,
-                    ExtraSet = unit.ExtraSet
-                }).ToList();
+                var lastStat = JsonSerializer.Deserialize<List<ExerciseUnitModel>>(stats.DataStat)?.Last() ?? throw new InvalidOperationException("Failed to deserialize StatsModel.");
+
+                return new GetExerciseUnitItemQuery { SessionDate = lastStat.SessionDate, ExerciseSet = lastStat.ExerciseSet, ExtraSet = lastStat.ExtraSet };
             }
         }
     }
