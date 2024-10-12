@@ -1,6 +1,6 @@
-import classes from "./ErrorScreen.module.css";
+import classes from "./ErrorPage.module.css";
 
-function ErrorScreen() {
+function ErrorPage() {
   return (
     <div className={classes.container}>
       <span>Page didn't exist</span>
@@ -8,4 +8,4 @@ function ErrorScreen() {
   );
 }
 
-export default ErrorScreen;
+export default ErrorPage;

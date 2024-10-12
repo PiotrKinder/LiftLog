@@ -1,16 +1,12 @@
-import classes from "./SignUpScreen.module.css";
-import Button from "../../controls/button/Button";
-import Checkbox from "../../controls/checkbox/Checkbox";
-import Input from "../../controls/input/Input";
+import classes from "./SignUpPage.module.css";
+import Button from "../../components/button/Button";
+import Checkbox from "../../components/checkbox/Checkbox";
+import Input from "../../components/input/Input";
 import icons from "../../helpers/iconManager/enums/IconTypeEnum";
-import Header from "../../controls/header/Header";
-import { useDispatch } from "react-redux";
-import { screenActions } from "../../slices/screenSlice/screenSlice";
-import ScreenEnum from "../../enums/ScreenEnum";
+import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 
-function SignUpScreen() {
-  const dispatch = useDispatch();
+function SignUpPage() {
   const navigate = useNavigate();
 
   function buttonBackHandler() {
@@ -21,16 +17,23 @@ function SignUpScreen() {
     <div className={classes.container}>
       <form>
         <Header text="Sign up" />
-        <Input placeholder="Login" icon={icons.User} />
+        <Input onInputChange={() => {}} placeholder="Login" icon={icons.User} />
         <Input
+          onInputChange={() => {}}
           placeholder="Email"
           type="email"
           icon={icons.Mail}
           isValid={false}
           validationMessage="Validation info!"
         />
-        <Input placeholder="Password" type="password" icon={icons.Key} />
         <Input
+          onInputChange={() => {}}
+          placeholder="Password"
+          type="password"
+          icon={icons.Key}
+        />
+        <Input
+          onInputChange={() => {}}
           placeholder="Confirm password"
           type="password"
           icon={icons.Confirm}
@@ -43,4 +46,4 @@ function SignUpScreen() {
   );
 }
 
-export default SignUpScreen;
+export default SignUpPage;

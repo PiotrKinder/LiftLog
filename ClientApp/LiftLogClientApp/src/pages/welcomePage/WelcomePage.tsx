@@ -1,13 +1,11 @@
-import Button from "../../controls/button/Button";
-import classes from "./WelcomeScreen.module.css";
+import Button from "../../components/button/Button";
+import classes from "./WelcomePage.module.css";
 import background from "../../../public/background.gif";
 import logo from "../../../public/liftLogLogov2whiteClear.png";
-import { screenActions } from "../../slices/screenSlice/screenSlice";
 import { useDispatch } from "react-redux";
-import ScreenEnum from "../../enums/ScreenEnum";
 import { useNavigate } from "react-router-dom";
 
-function WelcomeScreen() {
+function WelcomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   function buttonLoginHandler() {
@@ -34,4 +32,4 @@ function WelcomeScreen() {
   );
 }
 
-export default WelcomeScreen;
+export default WelcomePage;

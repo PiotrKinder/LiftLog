@@ -1,30 +1,25 @@
 import "./Style.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import LogInScreen from "./screens/loginScreen/LogInScreen";
-import SignUpScreen from "./screens/signupScreen/SignUpScreen";
-import WelcomeScreen from "./screens/welcomeScreen/WelcomeScreen";
-import ScreenEnum from "./enums/ScreenEnum";
-import { useSelector } from "react-redux";
-import ScreenState from "./slices/screenSlice/IScreenState";
-import { Children } from "react";
-import ErrorScreen from "./screens/errorScreen/ErrorScreen";
+import LogInPage from "./pages/loginPage/LogInPage";
+import SignUpPage from "./pages/signupPage/SignUpPage";
+import WelcomePage from "./pages/welcomePage/WelcomePage";
+import ErrorPage from "./pages/errorPage/ErrorScreen";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <WelcomeScreen />,
-    errorElement: <ErrorScreen />,
+    element: <WelcomePage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "signup",
-    element: <SignUpScreen />,
+    element: <SignUpPage />,
   },
   {
     path: "login",
-    element: <LogInScreen />,
+    element: <LogInPage />,
   },
 ]);
 function App() {
-  const currentScreen = useSelector((state: ScreenState) => state.screen);
   return <RouterProvider router={router} />;
 }
 

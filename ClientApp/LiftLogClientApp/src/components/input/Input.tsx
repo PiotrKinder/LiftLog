@@ -4,13 +4,21 @@ import { useState } from "react";
 import IconTypeEnum from "../../helpers/iconManager/enums/IconTypeEnum";
 
 interface Props {
+  onInputChange: (value: string) => void;
   isValid?: boolean;
   validationMessage?: string;
   placeholder: string;
   icon?: IconTypeEnum;
   type?: string;
 }
-function Input({ icon, placeholder, type, isValid, validationMessage }: Props) {
+function Input({
+  onInputChange,
+  icon,
+  placeholder,
+  type,
+  isValid,
+  validationMessage,
+}: Props) {
   const [isActive, setIsActive] = useState(false);
 
   function onFocusEventHandler(): void {
@@ -18,6 +26,9 @@ function Input({ icon, placeholder, type, isValid, validationMessage }: Props) {
   }
   function onBlurEventHandler(): void {
     setIsActive(false);
+  }
+  function handleHange(event: React.ChangeEvent<HTMLInputElement>) {
+    onInputChange(event.target.value);
   }
 
   return (
@@ -27,6 +38,7 @@ function Input({ icon, placeholder, type, isValid, validationMessage }: Props) {
       }`}
     >
       <input
+        onChange={handleHange}
         placeholder={placeholder}
         className={classes.input}
         onFocus={onFocusEventHandler}
