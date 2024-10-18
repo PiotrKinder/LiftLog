@@ -15,6 +15,8 @@ namespace API.Controllers
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(typeof(AuthResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromBody] AuthRequest loginRequest)
         {
             try
@@ -30,7 +32,7 @@ namespace API.Controllers
                     }
 
                 });
-                return Ok(new { token });
+                return Ok(new AuthResponse { Token = token });
             }
             catch (UnauthorizedAccessException ex)
             {

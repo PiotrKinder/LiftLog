@@ -145,3 +145,17 @@ C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\MediatR.dll
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\MediatR.Contracts.dll
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\DTO.dll
 C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\DTO.pdb
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Namotion.Reflection.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NJsonSchema.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NJsonSchema.Annotations.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NJsonSchema.NewtonsoftJson.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NJsonSchema.Yaml.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NSwag.Annotations.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NSwag.AspNetCore.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NSwag.Core.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NSwag.Core.Yaml.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NSwag.Generation.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\NSwag.Generation.AspNetCore.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\YamlDotNet.dll
+C:\Repo\LiftLogRepo\ServerApp\API\bin\Debug\net8.0\swagger.json

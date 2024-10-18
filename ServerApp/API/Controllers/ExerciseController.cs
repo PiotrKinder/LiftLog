@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize]
     public class ExerciseController : BaseApiController
     {
         [HttpPost("add")]
+        [Authorize]
         public async Task<IActionResult> Add([FromBody] CreateExerciseCommand request)
         {
             try
@@ -25,6 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getAll")]
+        [Authorize]
         public async Task<ActionResult<List<GetExerciseListItemQuery>>> GetUserExercises()
         {
             try
@@ -39,6 +40,7 @@ namespace API.Controllers
         }
 
         [HttpGet("get/{id}")]
+        [Authorize]
         public async Task<ActionResult<GetExerciseQuery>> GetExercise(Guid id)
         {
             try
@@ -53,6 +55,7 @@ namespace API.Controllers
         }
 
         [HttpPut("edit/{id}")]
+        [Authorize]
         public async Task<IActionResult> EditExercise(Guid id, EditExerciseCommand editExerciseRequest)
         {
             try

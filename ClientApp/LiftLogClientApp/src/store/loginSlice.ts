@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchLoginData } from '../api/fetchData';
+import { AuthRequest, AuthResponse } from '../api/Contracts';
+import ApiClientAcces from '../api/ApiClientAcces';
 
-export const fetchData = createAsyncThunk('data/fetchLoginData', async ({ email, password }: { email: string; password: string }) => {
-    const data = await fetchLoginData(email, password);
+export const fetchData = createAsyncThunk('data/fetchLoginData', async (authData: AuthRequest) => {
+     const api = ApiClientAcces.getInstance();
+     const data: AuthResponse = await api.login(authData);
     return data;
   });
 
   export interface DataState {
-    data: any;
+    data: AuthResponse | null;
     loading: boolean;
     error: string | null;
   }
@@ -29,8 +31,10 @@ export const fetchData = createAsyncThunk('data/fetchLoginData', async ({ email,
             state.error = null;
           })
           .addCase(fetchData.fulfilled, (state, action) => {
-            state.loading = false;
-            state.data = action.payload;
+            if(action.payload){
+              state.loading = false;
+              state.data = action.payload;
+            }
           })
           .addCase(fetchData.rejected, (state, action) => {
             state.loading = false;

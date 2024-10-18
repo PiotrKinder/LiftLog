@@ -1,12 +1,12 @@
 import axios from 'axios'
-const apiURL: string = "http://localhost:5000/api"
 
-export async function fetchLoginData(email: string, password: string): Promise<any>{
+import ApiClientAcces from './ApiClientAcces';
+import { AuthRequest } from './Contracts';
+const apiURL: string = "http://localhost:5000/api";
+
+export async function fetchLoginData(body: AuthRequest): Promise<any>{
     try{
-        const response = await axios.post(`${apiURL}/auth/login`,{
-            email: email,
-            password: password,
-        });
+        const response = await axios.post(`${apiURL}/auth/login`,body);
         return response.data;
     }catch(error){
         console.error("Error fetching data: ", error);

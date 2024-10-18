@@ -11,6 +11,7 @@ import ButtonTypesEnum from "../../components/button/enums/ButtonTypesEnum";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/index";
 import { fetchData } from "../../store/loginSlice";
+import { AuthRequest } from "../../api/Contracts";
 
 function LogInPage() {
   const [email, setEmail] = useState<string>("");
@@ -33,12 +34,13 @@ function LogInPage() {
 
   function logInHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    dispatch(fetchData({ email, password }));
+    const authData = new AuthRequest({ email, password });
+    dispatch(fetchData(authData));
   }
 
   useEffect(() => {
     if (data?.token && !loading) {
-      navigate("/");
+      navigate("/menu");
     }
   });
 
