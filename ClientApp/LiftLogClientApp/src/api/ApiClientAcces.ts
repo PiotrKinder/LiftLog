@@ -9,9 +9,9 @@ export class ApiClientAcces {
 
     private constructor() {}
 
-    public static getInstance(): ApiClient {
+    public static getInstance(token?: string): ApiClient {
         this.axiosInstance.interceptors.request.use((config) => {
-            const token = "test_token_data";
+            // const token = "test_token_data";
             //const token = this.getToken();
             if (token) {
                 config.headers.Authorization = `Bearer ${token}`;

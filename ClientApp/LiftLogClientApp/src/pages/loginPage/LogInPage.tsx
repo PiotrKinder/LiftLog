@@ -5,12 +5,11 @@ import Checkbox from "../../components/checkbox/Checkbox";
 import Button from "../../components/button/Button";
 import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import ButtonTypesEnum from "../../components/button/enums/ButtonTypesEnum";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/index";
-import { fetchData } from "../../store/loginSlice";
+import { fetchLoginData } from "../../store/loginSlice";
 import { AuthRequest } from "../../api/Contracts";
 
 function LogInPage() {
@@ -18,7 +17,7 @@ function LogInPage() {
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { data, loading } = useSelector((state: RootState) => state.data);
+  const { token, loading } = useSelector((state: RootState) => state.login);
 
   function buttonBackHandler() {
     navigate("/");
@@ -35,11 +34,11 @@ function LogInPage() {
   function logInHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const authData = new AuthRequest({ email, password });
-    dispatch(fetchData(authData));
+    dispatch(fetchLoginData(authData));
   }
 
   useEffect(() => {
-    if (data?.token && !loading) {
+    if (token && !loading) {
       navigate("/menu");
     }
   });

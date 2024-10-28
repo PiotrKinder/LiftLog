@@ -73,7 +73,7 @@
         }
       }
     },
-    "/api/Exercise/add": {
+    "/api/Exercise/addExercise": {
       "post": {
         "tags": [
           "Exercise"
@@ -104,7 +104,7 @@
         }
       }
     },
-    "/api/Exercise/getAll": {
+    "/api/Exercise/getAllExercises": {
       "get": {
         "tags": [
           "Exercise"
@@ -142,7 +142,7 @@
         }
       }
     },
-    "/api/Exercise/get/{id}": {
+    "/api/Exercise/getExercise/{id}": {
       "get": {
         "tags": [
           "Exercise"
@@ -182,7 +182,7 @@
         }
       }
     },
-    "/api/Exercise/edit/{id}": {
+    "/api/Exercise/editExercise/{id}": {
       "put": {
         "tags": [
           "Exercise"
@@ -224,7 +224,7 @@
         }
       }
     },
-    "/api/Stats/add/exercise={exerciseId}": {
+    "/api/Stats/addStats/exercise={exerciseId}": {
       "post": {
         "tags": [
           "Stats"
@@ -266,7 +266,7 @@
         }
       }
     },
-    "/api/Stats/get/exercise={exerciseId}": {
+    "/api/Stats/getStats/exercise={exerciseId}": {
       "get": {
         "tags": [
           "Stats"
@@ -315,7 +315,7 @@
         }
       }
     },
-    "/api/Stats/get/last/exercise={exerciseId}": {
+    "/api/Stats/getLastStats/exercise={exerciseId}": {
       "get": {
         "tags": [
           "Stats"

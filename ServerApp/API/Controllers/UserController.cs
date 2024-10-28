@@ -1,5 +1,6 @@
 ﻿using Application.Users;
 using DTO.Contracts.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -22,6 +23,7 @@ namespace API.Controllers
 
         }
 
+        [Authorize]
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
         {

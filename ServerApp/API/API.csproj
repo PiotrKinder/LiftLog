@@ -26,8 +26,6 @@
   </Target>
 
   <Target Name="NSwagGenerate" AfterTargets="Build">
-	  <!--<Exec Command="nswag openapi2tsclient /input:swagger.json /output:..\..\ClientApp\LiftLogClientApp\src\api\contracts.ts /template:Axios" />-->
     <Exec Command="nswag run ApiNswagConfig.nswag" />
-     <!--<Copy SourceFiles="path_to_generated_contract\*.ts" DestinationFolder="..\frontend_project\src\api" />-->
   </Target>
 </Project>

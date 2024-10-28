@@ -2,20 +2,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthRequest, AuthResponse } from '../api/Contracts';
 import ApiClientAcces from '../api/ApiClientAcces';
 
-export const fetchData = createAsyncThunk('data/fetchLoginData', async (authData: AuthRequest) => {
+export const fetchLoginData = createAsyncThunk('data/fetchLoginData', async (authData: AuthRequest) => {
      const api = ApiClientAcces.getInstance();
      const data: AuthResponse = await api.login(authData);
     return data;
   });
 
-  export interface DataState {
-    data: AuthResponse | null;
+  export interface LoginState {
+    token: string | undefined | null;
     loading: boolean;
     error: string | null;
   }
   
-  const initialState: DataState = {
-    data: null,
+  const initialState: LoginState = {
+    token: null,
     loading: false,
     error: null,
   };
@@ -26,19 +26,19 @@ export const fetchData = createAsyncThunk('data/fetchLoginData', async (authData
     reducers:{},
     extraReducers: (builder) => {
         builder
-        .addCase(fetchData.pending, (state) => {
+        .addCase(fetchLoginData.pending, (state) => {
             state.loading = true;
             state.error = null;
           })
-          .addCase(fetchData.fulfilled, (state, action) => {
+          .addCase(fetchLoginData.fulfilled, (state, action) => {
             if(action.payload){
               state.loading = false;
-              state.data = action.payload;
+              state.token = action.payload.token;
             }
           })
-          .addCase(fetchData.rejected, (state, action) => {
+          .addCase(fetchLoginData.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.error.message || 'Failed to fetch data';
+            state.error = action.error.message || 'Failed to login';
         });
     },
   });

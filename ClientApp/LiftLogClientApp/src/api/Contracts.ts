@@ -21,33 +21,33 @@ export interface IApiClient {
      * @param body (optional) 
      * @return OK
      */
-    add(body?: CreateExerciseCommand | undefined): Promise<void>;
+    addExercise(body?: CreateExerciseCommand | undefined): Promise<void>;
     /**
      * @return OK
      */
-    getAll(): Promise<GetExerciseListItemQuery[]>;
+    getAllExercises(): Promise<GetExerciseListItemQuery[]>;
     /**
      * @return OK
      */
-    get(id: string): Promise<GetExerciseQuery>;
-    /**
-     * @param body (optional) 
-     * @return OK
-     */
-    edit(id: string, body?: EditExerciseCommand | undefined): Promise<void>;
+    getExercise(id: string): Promise<GetExerciseQuery>;
     /**
      * @param body (optional) 
      * @return OK
      */
-    add2(exerciseId: string, body?: CreateExerciseUnitCommand | undefined): Promise<void>;
+    editExercise(id: string, body?: EditExerciseCommand | undefined): Promise<void>;
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    addStats(exerciseId: string, body?: CreateExerciseUnitCommand | undefined): Promise<void>;
     /**
      * @return OK
      */
-    getAll2(exerciseId: string): Promise<GetExerciseUnitListItemQuery[]>;
+    getStats(exerciseId: string): Promise<GetExerciseUnitListItemQuery[]>;
     /**
      * @return OK
      */
-    last(exerciseId: string): Promise<GetExerciseUnitItemQuery>;
+    getLastStats(exerciseId: string): Promise<GetExerciseUnitItemQuery>;
     /**
      * @param body (optional) 
      * @return OK
@@ -140,8 +140,8 @@ export class ApiClient implements IApiClient {
      * @param body (optional) 
      * @return OK
      */
-    add(body?: CreateExerciseCommand | undefined, cancelToken?: CancelToken): Promise<void> {
-        let url_ = this.baseUrl + "/api/Exercise/add";
+    addExercise(body?: CreateExerciseCommand | undefined, cancelToken?: CancelToken): Promise<void> {
+        let url_ = this.baseUrl + "/api/Exercise/addExercise";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -163,11 +163,11 @@ export class ApiClient implements IApiClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processAdd(_response);
+            return this.processAddExercise(_response);
         });
     }
 
-    protected processAdd(response: AxiosResponse): Promise<void> {
+    protected processAddExercise(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -191,8 +191,8 @@ export class ApiClient implements IApiClient {
     /**
      * @return OK
      */
-    getAll( cancelToken?: CancelToken): Promise<GetExerciseListItemQuery[]> {
-        let url_ = this.baseUrl + "/api/Exercise/getAll";
+    getAllExercises( cancelToken?: CancelToken): Promise<GetExerciseListItemQuery[]> {
+        let url_ = this.baseUrl + "/api/Exercise/getAllExercises";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: AxiosRequestConfig = {
@@ -211,11 +211,11 @@ export class ApiClient implements IApiClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGetAll(_response);
+            return this.processGetAllExercises(_response);
         });
     }
 
-    protected processGetAll(response: AxiosResponse): Promise<GetExerciseListItemQuery[]> {
+    protected processGetAllExercises(response: AxiosResponse): Promise<GetExerciseListItemQuery[]> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -249,8 +249,8 @@ export class ApiClient implements IApiClient {
     /**
      * @return OK
      */
-    get(id: string, cancelToken?: CancelToken): Promise<GetExerciseQuery> {
-        let url_ = this.baseUrl + "/api/Exercise/get/{id}";
+    getExercise(id: string, cancelToken?: CancelToken): Promise<GetExerciseQuery> {
+        let url_ = this.baseUrl + "/api/Exercise/getExercise/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -272,11 +272,11 @@ export class ApiClient implements IApiClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGet(_response);
+            return this.processGetExercise(_response);
         });
     }
 
-    protected processGet(response: AxiosResponse): Promise<GetExerciseQuery> {
+    protected processGetExercise(response: AxiosResponse): Promise<GetExerciseQuery> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -304,8 +304,8 @@ export class ApiClient implements IApiClient {
      * @param body (optional) 
      * @return OK
      */
-    edit(id: string, body?: EditExerciseCommand | undefined, cancelToken?: CancelToken): Promise<void> {
-        let url_ = this.baseUrl + "/api/Exercise/edit/{id}";
+    editExercise(id: string, body?: EditExerciseCommand | undefined, cancelToken?: CancelToken): Promise<void> {
+        let url_ = this.baseUrl + "/api/Exercise/editExercise/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -330,11 +330,11 @@ export class ApiClient implements IApiClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processEdit(_response);
+            return this.processEditExercise(_response);
         });
     }
 
-    protected processEdit(response: AxiosResponse): Promise<void> {
+    protected processEditExercise(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -359,8 +359,8 @@ export class ApiClient implements IApiClient {
      * @param body (optional) 
      * @return OK
      */
-    add2(exerciseId: string, body?: CreateExerciseUnitCommand | undefined, cancelToken?: CancelToken): Promise<void> {
-        let url_ = this.baseUrl + "/api/Stats/add/exercise={exerciseId}";
+    addStats(exerciseId: string, body?: CreateExerciseUnitCommand | undefined, cancelToken?: CancelToken): Promise<void> {
+        let url_ = this.baseUrl + "/api/Stats/addStats/exercise={exerciseId}";
         if (exerciseId === undefined || exerciseId === null)
             throw new Error("The parameter 'exerciseId' must be defined.");
         url_ = url_.replace("{exerciseId}", encodeURIComponent("" + exerciseId));
@@ -385,11 +385,11 @@ export class ApiClient implements IApiClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processAdd2(_response);
+            return this.processAddStats(_response);
         });
     }
 
-    protected processAdd2(response: AxiosResponse): Promise<void> {
+    protected processAddStats(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -413,8 +413,8 @@ export class ApiClient implements IApiClient {
     /**
      * @return OK
      */
-    getAll2(exerciseId: string, cancelToken?: CancelToken): Promise<GetExerciseUnitListItemQuery[]> {
-        let url_ = this.baseUrl + "/api/Stats/get/exercise={exerciseId}";
+    getStats(exerciseId: string, cancelToken?: CancelToken): Promise<GetExerciseUnitListItemQuery[]> {
+        let url_ = this.baseUrl + "/api/Stats/getStats/exercise={exerciseId}";
         if (exerciseId === undefined || exerciseId === null)
             throw new Error("The parameter 'exerciseId' must be defined.");
         url_ = url_.replace("{exerciseId}", encodeURIComponent("" + exerciseId));
@@ -436,11 +436,11 @@ export class ApiClient implements IApiClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processGetAll2(_response);
+            return this.processGetStats(_response);
         });
     }
 
-    protected processGetAll2(response: AxiosResponse): Promise<GetExerciseUnitListItemQuery[]> {
+    protected processGetStats(response: AxiosResponse): Promise<GetExerciseUnitListItemQuery[]> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -474,8 +474,8 @@ export class ApiClient implements IApiClient {
     /**
      * @return OK
      */
-    last(exerciseId: string, cancelToken?: CancelToken): Promise<GetExerciseUnitItemQuery> {
-        let url_ = this.baseUrl + "/api/Stats/get/last/exercise={exerciseId}";
+    getLastStats(exerciseId: string, cancelToken?: CancelToken): Promise<GetExerciseUnitItemQuery> {
+        let url_ = this.baseUrl + "/api/Stats/getLastStats/exercise={exerciseId}";
         if (exerciseId === undefined || exerciseId === null)
             throw new Error("The parameter 'exerciseId' must be defined.");
         url_ = url_.replace("{exerciseId}", encodeURIComponent("" + exerciseId));
@@ -497,11 +497,11 @@ export class ApiClient implements IApiClient {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.processLast(_response);
+            return this.processGetLastStats(_response);
         });
     }
 
-    protected processLast(response: AxiosResponse): Promise<GetExerciseUnitItemQuery> {
+    protected processGetLastStats(response: AxiosResponse): Promise<GetExerciseUnitItemQuery> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {

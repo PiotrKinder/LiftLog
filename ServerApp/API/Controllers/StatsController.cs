@@ -9,7 +9,7 @@ namespace API.Controllers
     [Authorize]
     public class StatsController : BaseApiController
     {
-        [HttpPost("add/exercise={exerciseId}")]
+        [HttpPost("addStats/exercise={exerciseId}")]
         public async Task<IActionResult> SaveStats([FromBody] CreateExerciseUnitCommand request, Guid exerciseId)
         {
             try
@@ -23,7 +23,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("get/exercise={exerciseId}")]
+        [HttpGet("getStats/exercise={exerciseId}")]
         public async Task<ActionResult<List<GetExerciseUnitListItemQuery>>> GetStats(Guid exerciseId)
         {
             try
@@ -37,7 +37,7 @@ namespace API.Controllers
 
         }
 
-        [HttpGet("get/last/exercise={exerciseId}")]
+        [HttpGet("getLastStats/exercise={exerciseId}")]
         public async Task<ActionResult<GetExerciseUnitItemQuery>> GetLastStats(Guid exerciseId)
         {
             try
